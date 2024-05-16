@@ -17,19 +17,57 @@
     </style>
 </head>
 <body>
-  <div id="parentDiv">
-    <p>
+  <div style="position: relative;" id="parentDiv">
+    <p 
+      id="scoreContainer"
+      style="
+        position: absolute;
+        z-index: 10;
+        color: white;
+        margin: 0;
+        left: 10px;
+        top: 10px;
+        display: none;
+      "
+    >
       <span style="color: blue;">Pontos: </span>
       <span id="scoreEl">0</span>
     </p>
     <canvas></canvas>
     
-    <div id="startScreen">
-      <div>
-        <h1>Space Invaders</h1>
-        <div id="startButton">
+    <div 
+      id="startScreen"
+      style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: url('./img/startScreenBackground.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        z-index: 20;
+      "
+    >
+      <div style="text-align: center;">
+        <h1 style="color: white;">Space Invaders</h1>
+        <div 
+          id="startButton"
+          style="position: relative; display: inline-block; cursor: pointer;"
+        >
           <img src="./img/button.png" alt="Start Button" />
-          <span>Iniciar</span>
+          <span 
+            style="
+              position: absolute;
+              color: white;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+            "
+          >Iniciar</span>
         </div>
       </div>
     </div><!-- Fim startScreen-->
