@@ -18,4 +18,13 @@ class Invader {
       };
     };
   }
+    draw() {
+        caches.drawImage(
+            this.image,
+            this.position.x,
+            this.position.y,
+            this.width,
+            this.height
+        );
+    }
 }
