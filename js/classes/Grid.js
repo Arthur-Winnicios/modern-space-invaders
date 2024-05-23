@@ -26,4 +26,15 @@ class Grid {
             }
         }
     }
+
+    update() {
+        this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
+        this.velocity.y = 0;
+
+        if(this.position.x + this.width >= canvas.width || this.position.x <= 0) {
+            this.velocity.x = -this.velocity.x * 1.15;
+            this.velocity.y = 30;
+        }
+    }
 }
