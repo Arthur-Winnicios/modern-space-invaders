@@ -143,4 +143,28 @@ function init() {
         })
       );
     }
+}
+
+if (frames % 200 === 0 && bombs.length < 3) {
+    bombs.push(
+      new Bomb({
+        position: {
+          x: randomBetween(Bomb.radius, canvas.width - Bomb.radius),
+          y: randomBetween(Bomb.radius, canvas.height - Bomb.radius)
+        },
+        velocity: {
+          x: (Math.random() - 0.5) * 6,
+          y: (math.random() - 0.5) * 6
+        }
+      })
+    );
   }
+
+  for(let i = bombs.length - 1; i >= 0; i--) {
+    const bomb = bombs[i];
+    if (bomb.opacity <= 0)
+      bombs.splice(i, 1);
+    else bomb.update();
+  }
+
+
