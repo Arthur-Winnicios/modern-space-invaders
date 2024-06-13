@@ -3,6 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="img/spaceship.png" type="image/x-icon">
     <title>Space Invaders</title>
     <style>
       body,
@@ -12,14 +19,14 @@
         align-items: center;
         margin: 0;
         height: 100%;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: "Press Start 2P", Arial, Helvetica, sans-serif;
         font-size: 14px;
         background-color: rgb(214, 103, 214);
       }
     </style>
   </head>
   <body>
-    <div style="position: relative;" id="parentDiv">
+    <div style="position: relative" id="parentDiv">
       <p
         id="scoreContainer"
         style="
@@ -40,7 +47,6 @@
       <div
         id="startScreen"
         style="
-
           position: absolute;
           top: 0;
           left: 0;
@@ -59,7 +65,7 @@
           <h1 style="color: white">Space Invaders</h1>
           <div
             id="startButton"
-            style="position: relative; display: inline-block; cursor: pointer;"
+            style="position: relative; display: inline-block; cursor: pointer"
           >
             <img src="./img/button.png" alt="Start Button" />
             <span
@@ -69,6 +75,7 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
+                font-size: 10px;
               "
               >Iniciar</span
             >
@@ -108,6 +115,7 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
+                font-size: 10px;
               "
               >Reiniciar</span
             >
