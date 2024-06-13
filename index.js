@@ -211,18 +211,18 @@ invaderProjectiles.forEach((invaderProjectile, index) => {
   }
 });
 
-for(let i = projectiles.length - 1; i >= 0; i--) {
-  const projectile = projectiles[i]; 
+for (let i = projectiles.length - 1; i >= 0; i--) {
+  const projectile = projectiles[i];
 
-  for(let j = bombs.length - 1; j >= 0; j--) {
+  for (let j = bombs.length - 1; j >= 0; j--) {
     const bomb = bombs[j];
 
-    if(
+    if (
       Math.hypot(
         projectile.position.x - bomb.position.x,
         projectile.position.y - bomb.position.y
       ) <
-      projectile.radius + bomb.radius &&
+        projectile.radius + bomb.radius &&
       !bomb.active
     ) {
       projectiles.splice(i, 1);
@@ -230,10 +230,10 @@ for(let i = projectiles.length - 1; i >= 0; i--) {
     }
   }
 
-  for(let j = powerUps.length - 1; j >= 0; j--) {
+  for (let j = powerUps.length - 1; j >= 0; j--) {
     const powerUp = powerUps[j];
 
-    if(
+    if (
       Math.hypot(
         projectile.position.x - powerUp.position.x,
         projectile.position.y - powerUp.position.y
@@ -251,9 +251,9 @@ for(let i = projectiles.length - 1; i >= 0; i--) {
     }
   }
 
-    if(projectile.position.y + projectile.radius <= 0) {
-      projectiles.splice(i, 1);
-    } else {
-      projectile.update();
-    }
+  if (projectile.position.y + projectile.radius <= 0) {
+    projectiles.splice(i, 1);
+  } else {
+    projectile.update();
   }
+}
