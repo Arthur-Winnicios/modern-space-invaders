@@ -108,3 +108,39 @@ function init() {
       fades: true
     });
   }
+
+  function Animation() {
+    if (!game.active) return;
+    requestAnimationFrame(animate);
+  
+    let msNow = window.performance.now();
+    let elapse = msNow - msPrev;
+  
+    if (elapse > fpsInterval) return;
+    msPrev = msNow - (elapse % fpsInterval);
+  
+    c.fillStyle = "black";
+    c.fillRect(0, 0, canvas.width, canvas.height);
+  
+    for (let i = powerUps.lenght - 1; i >= 0; i--) {
+      const powerUp = powerUps[i];
+      if (powerUp.position.x - powerUp.radius >= canvas.width)
+        powerUps.splice(i, 1);
+      else powerUp.update();
+    }
+  
+    if (frames % 500 === 0) {
+      powerUps.push(
+        new PowerUp({
+          position: {
+            x: 0,
+            y: Math.random() * 300 + 15
+          },
+          velocity: {
+            x: 5,
+            y: 0
+          }
+        })
+      );
+    }
+  }
