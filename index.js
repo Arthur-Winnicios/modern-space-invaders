@@ -143,76 +143,76 @@ function Animation() {
       })
     );
   }
-}
 
-if (frames % 200 === 0 && bombs.length < 3) {
-  bombs.push(
-    new Bomb({
-      position: {
-        x: randomBetween(Bomb.radius, canvas.width - Bomb.radius),
-        y: randomBetween(Bomb.radius, canvas.height - Bomb.radius)
-      },
-      velocity: {
-        x: (Math.random() - 0.5) * 6,
-        y: (math.random() - 0.5) * 6
-      }
-    })
-  );
-}
-
-for (let i = bombs.length - 1; i >= 0; i--) {
-  const bomb = bombs[i];
-  if (bomb.opacity <= 0) bombs.splice(i, 1);
-  else bomb.update();
-}
-
-player.update();
-for (let i = player.particles.lenght - 1; i >= 0; i--) {
-  const particle = player.particles[i];
-  particle.update();
-  if (particle.opacity === 0) player.particles[i].splice(i, 1);
-}
-
-particles.forEach((particle, i) => {
-  if (particle.position.y - particle.radius >= canvas.height) {
-    particle.position.x = Math.random() * canvas.width;
-    particle.position.y = -particle.radius;
+  if (frames % 200 === 0 && bombs.length < 3) {
+    bombs.push(
+      new Bomb({
+        position: {
+          x: randomBetween(Bomb.radius, canvas.width - Bomb.radius),
+          y: randomBetween(Bomb.radius, canvas.height - Bomb.radius)
+        },
+        velocity: {
+          x: (Math.random() - 0.5) * 6,
+          y: (math.random() - 0.5) * 6
+        }
+      })
+    );
   }
 
-  if (particle.opacity <= 0) {
-    setTimeout(() => {
-      particles.splice(i, 1);
-    }, 0);
-  } else {
+  for (let i = bombs.length - 1; i >= 0; i--) {
+    const bomb = bombs[i];
+    if (bomb.opacity <= 0) bombs.splice(i, 1);
+    else bomb.update();
+  }
+
+  player.update();
+  for (let i = player.particles.lenght - 1; i >= 0; i--) {
+    const particle = player.particles[i];
     particle.update();
+    if (particle.opacity === 0) player.particles[i].splice(i, 1);
   }
-});
 
-invaderProjectiles.forEach((invaderProjectile, index) => {
-  if (
-    invaderProjectile.position.y + invaderProjectile.heigth >=
-    canvas.height
-  ) {
-    setTimeout(() => {
+  particles.forEach((particle, i) => {
+    if (particle.position.y - particle.radius >= canvas.height) {
+      particle.position.x = Math.random() * canvas.width;
+      particle.position.y = -particle.radius;
+    }
+
+    if (particle.opacity <= 0) {
+      setTimeout(() => {
+        particles.splice(i, 1);
+      }, 0);
+    } else {
+      particle.update();
+    }
+  });
+
+  invaderProjectiles.forEach((invaderProjectile, index) => {
+    if (
+      invaderProjectile.position.y + invaderProjectile.heigth >=
+      canvas.height
+    ) {
+      setTimeout(() => {
+        invaderProjectiles.splice(index, 1);
+      }, 0);
+    } else {
+      invaderProjectile.update();
+    }
+
+    if (
+      rectangularCollision({
+        rectangle1: invaderProject,
+        rectangle2: player
+      })
+    ) {
       invaderProjectiles.splice(index, 1);
-    }, 0);
-  } else {
-    invaderProjectile.update();
-  }
-
-  if (
-    rectangularCollision({
-      rectangle1: invaderProject,
-      rectangle2: player
-    })
-  ) {
-    invaderProjectiles.splice(index, 1);
-    endGame();
-  }
-});
+      endGame();
+    }
+  });
+}
 
 for (let i = projectiles.length - 1; i >= 0; i--) {
-  const projectile = projectiles[i];
+  const projectiles = projectiles[i];
 
   for (let j = bombs.length - 1; j >= 0; j--) {
     const bomb = bombs[j];
@@ -249,92 +249,115 @@ for (let i = projectiles.length - 1; i >= 0; i--) {
         player.powerUp = null;
       }, 5000);
     }
-  }
 
-  if (projectile.position.y + projectile.radius <= 0) {
-    projectiles.splice(i, 1);
-  } else {
-    projectile.update();
-  }
-}
-
-grids.forEach((grid, gridIndex) => {
-  grid.update();
-
-  if (frames % 100 === 10 && grid.invaders.lenght > 0) {
-    grid.invaders[Math.floor(Math.random() * grid.invaders.lenght)].shoot(
-      invadersProjectiles
-    );
-  }
-
-  for (let i = grid.invaders.length - 1; i >= 0; i--) {
-    const invader = grid.invaders[i];
-    invader.update({ velocity: grid.velocity });
-
-    for (let j = bombs.length - 1; j >= 0; j--) {
-      const bomb = bombs[j];
-
-      const invaderRadius = 15;
-
-      if (
-        Math.hypot(
-          invader.position.x - bomb.position.x,
-          invader.position.y - bomb.position.y
-        ) <
-          invaderRadius + bomb.radius &&
-        bomb.active
-      ) {
-        score += 50;
-        scoreEl.innerHTML = score;
-
-        grid.invaders.splice(i, 1);
-        createScoreLabel({
-          object: invader,
-          score: 50
-        });
-
-        createParticles({
-          object: invader,
-          fades: true
-        });
-      }
+    if (projectile.position.y + projectile.radius <= 0) {
+      projectiles.splice(i, 1);
+    } else {
+      projectile.update();
     }
-    projectiles.forEach((projectile, j) => {
-      if (
-        projectile.position.y - projectile.radius <=
-          invader.position.y + invader.heigth &&
-        projectile.position.x + projectile.radius >= invader.position.x &&
-        projectile.position.x - projectile.radius <=
-          invader.position.x + invader.width &&
-        projectile.position.y + projectile.radius >= invader.position.y
-      ) {
-        setTimeout(() => {
-          const invaderFound = grid.invader.find(
-            (invader2) => invader2 === invader
-          );
-          const projectileFound = projectiles.find(
-            (projectile2) => projectile2 === projectile
-          );
-
-          if (invaderFound && projectileFound) {
-            score += 100;
-            scoreEl.innerHTML = score;
-
-            createScoreLabel({
-              object: invader
-            });
-
-            createParticles({
-              object: invader,
-              fades: true
-            });
-
-            audio.explode.play();
-            grid.invaders.spliced(i, 1);
-            projectiles.splice(j, 1);' '
-          }
-        });
-      }
-    });
   }
-});
+
+  grids.forEach((grid, gridIndex) => {
+    grid.update();
+
+    if (frames % 100 === 0 && grid.invaders.lenght > 0) {
+      grid.invaders[Math.floor(Math.random() * grid.invaders.lenght)].shoot(
+        invaderProjectiles
+      );
+    }
+    for (let i = grid.invaers.lenght - 1; i >= 0; i--) {
+      const invader = grid.invaders[i];
+      invader.update({ velocity: grid.velocity });
+
+      for (let j = bombs.length - 1; j >= 0; i--) {
+        const bomb = bombs[j];
+
+        const invadersRadius = 15;
+
+        if (
+          Math.hypot(
+            invader.position.x - bomb.position.x,
+            invader.position.y - bomb.position.y
+          ) <
+            invadersRadius + bomb.radius &&
+          bomb.active
+        ) {
+          score += 50;
+          scoreEl.innerHTML = score;
+
+          grid.invaders.splice(i, 1);
+          createScoreLabel({
+            object: invader,
+            score: 50
+          });
+
+          createParticlesLabel({
+            object: invader,
+            fades: true
+          });
+        }
+      }
+
+      projectiles.forEach((projectile, j) => {
+        if (
+          projectile.position.y - projectile.radius <=
+            invader.position.y + invader.heigth &&
+          projectile.position.x + projectile.radius >= invader.position.x &&
+          projectile.position.x - projectile.radius <=
+            invader.position.x + invader.width &&
+          projectile.position.y + projectile.radius >= invader.position.y
+        ) {
+          setTimeout(() => {
+            const invaderFound = grid.invader.find(
+              (invader2) => invader2 === invader
+            );
+            const projectileFound = projectiles.find(
+              (projectile2) => projectile2 === projectile
+            );
+
+            if (invaderFound && projectileFound) {
+              score += 100;
+              scoreEl.innerHTML = score;
+
+              createScoreLabel({
+                object: invader
+              });
+
+              createParticles({
+                object: invader,
+                fades: true
+              });
+
+              audio.explode.play();
+              grid.invaders.splice(i, 1);
+              projectiles.splice(j, 1);
+
+              if (grid.invaders.length > 0) {
+                const firstInvader = grid.invaders[0];
+                const lastInvader = grid.invaders[grid.invaders.lenght - 1];
+
+                grid.width =
+                  lastInvader.position.x -
+                  firstInvader.position.x +
+                  firstInvader.width;
+
+                grid.position.x = firstInvader.position.x;
+              } else {
+                grids.splice(gridIndex, 1);
+              }
+            }
+          }, 0);
+        }
+      });
+
+      if (
+        rectangularCollision({
+          rectangle1: invader,
+          rectangle2: player
+        }) &&
+         !game.over
+      )
+      endGame();
+    }
+  });
+}
