@@ -71,6 +71,7 @@ function init() {
   };
 
   score = 0;
+
   for (let i = 0; i < 100; i++) {
     particles.push(
       new Particle({
@@ -109,7 +110,7 @@ function endGame() {
   });
 }
 
-function Animation() {
+function animate() {
   if (!game.active) return;
   requestAnimationFrame(animate);
 
@@ -355,16 +356,16 @@ for (let i = projectiles.length - 1; i >= 0; i--) {
           rectangle1: invader,
           rectangle2: player
         }) &&
-         !game.over
+        !game.over
       )
-      endGame();
+        endGame();
     }
   });
 
-  if(keys.ArrowLeft.pressed && player.position.x >= 0) {
+  if (keys.ArrowLeft.pressed && player.position.x >= 0) {
     player.velocity.x = -7;
     player.rotation = -0.15;
-  } else if(
+  } else if (
     keys.ArrowRight.pressed &&
     player.position.x + player.width <= canvas.width
   ) {
@@ -375,7 +376,7 @@ for (let i = projectiles.length - 1; i >= 0; i--) {
     player.rotation = 0;
   }
 
-  if(frames % randomInterval === 0) {
+  if (frames % randomInterval === 0) {
     spawnBuffer = spawnBuffer < 0 ? 100 : spawnBuffer;
     grids.push(new Grid());
     randomInterval = Math.floor(Math.random() * 500 + spawnBuffer);
@@ -383,13 +384,13 @@ for (let i = projectiles.length - 1; i >= 0; i--) {
     spawnBuffer -= 100;
   }
 
-  if(
+  if (
     keys.Space.pressed &&
     player.powerUp === "Metralhadora" &&
     frames % 2 === 0 &&
     !game.over
   ) {
-    if(frames % 6 === 0) audio.shoot.play();
+    if (frames % 6 === 0) audio.shoot.play();
     projectiles.push(
       new Projectile({
         position: {
@@ -402,7 +403,7 @@ for (let i = projectiles.length - 1; i >= 0; i--) {
         },
         color: "yellow"
       })
-    )
+    );
   }
 
   frames++;
@@ -414,6 +415,13 @@ document.querySelector("#startButton").addEventListener("click", () => {
 
   document.querySelector("#startScreen").style.display = "none";
   document.querySelector("scoreContainer").style.display = "block";
+  init();
+  animate();
+});
+
+document.querySelector("#restartScreen").addEventListener("click", () => {
+  audio.select.play();
+  document.querySelector("#restartScreen").style.display = "none";
   init();
   animate();
 });
