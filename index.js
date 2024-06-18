@@ -407,3 +407,13 @@ for (let i = projectiles.length - 1; i >= 0; i--) {
 
   frames++;
 }
+
+document.querySelector("#startButton").addEventListener("click", () => {
+  audio.backgroundMusic.play();
+  audio.start.play();
+
+  document.querySelector("#startScreen").style.display = "none";
+  document.querySelector("scoreContainer").style.display = "block";
+  init();
+  animate();
+});
