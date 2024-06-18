@@ -360,4 +360,18 @@ for (let i = projectiles.length - 1; i >= 0; i--) {
       endGame();
     }
   });
+
+  if(keys.ArrowLeft.pressed && player.position.x >= 0) {
+    player.velocity.x = -7;
+    player.rotation = -0.15;
+  } else if(
+    keys.ArrowRight.pressed &&
+    player.position.x + player.width <= canvas.width
+  ) {
+    player.velocity.x = 7;
+    player.rotation = 0.15;
+  } else {
+    player.velocity.x = 0;
+    player.rotation = 0;
+  }
 }
