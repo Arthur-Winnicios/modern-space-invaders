@@ -1,5 +1,5 @@
 class Projectile {
-  constructor({ position, velocity, color = "red" }) {
+  constructor({ position, velocity, color = "cyan" }) {
     this.position = position;
     this.velocity = velocity;
     this.radius = 4;

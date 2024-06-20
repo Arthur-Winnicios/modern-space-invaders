@@ -8,7 +8,7 @@ class InvaderProjectile {
   }
 
   draw() {
-    c.fillStyle = "white";
+    c.fillStyle = "orange";
     c.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
 

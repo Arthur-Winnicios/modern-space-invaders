@@ -14,10 +14,10 @@ let bombs = [];
 let powerUps = [];
 
 let keys = {
-  ArrowLeft: {
+  a: {
     pressed: false
   },
-  ArrowRight: {
+  d: {
     pressed: false
   },
   space: {
@@ -49,10 +49,10 @@ function init() {
   powerUps = [];
 
   keys = {
-    ArrowLeft: {
+    a: {
       pressed: false
     },
-    ArrowRight: {
+    d: {
       pressed: false
     },
     space: {
@@ -363,11 +363,11 @@ function animate() {
     }
   });
 
-  if (keys.ArrowLeft.pressed && player.position.x >= 0) {
+  if (keys.a.pressed && player.position.x >= 0) {
     player.velocity.x = -7;
     player.rotation = -0.15;
   } else if (
-    keys.ArrowRight.pressed &&
+    keys.d.pressed &&
     player.position.x + player.width <= canvas.width
   ) {
     player.velocity.x = 7;
@@ -431,11 +431,11 @@ addEventListener("keydown", ({ key }) => {
   if (game.over) return;
 
   switch (key) {
-    case "ArrowLeft":
-      keys.ArrowLeft.pressed = true;
+    case "a":
+      keys.a.pressed = true;
       break;
-    case "ArrowRight":
-      keys.ArrowRight.pressed = true;
+    case "d":
+      keys.d.pressed = true;
       break;
     case " ":
       keys.space.pressed = true;
@@ -462,11 +462,11 @@ addEventListener("keydown", ({ key }) => {
 
 addEventListener("keyup", ({ key }) => {
   switch (key) {
-    case "ArrowLeft":
-      keys.ArrowLeft.pressed = false;
+    case "a":
+      keys.a.pressed = false;
       break;
-    case "ArrowRight":
-      keys.ArrowRight.pressed = false;
+    case "d":
+      keys.d.pressed = false;
       break;
     case " ":
       keys.space.pressed = false;
