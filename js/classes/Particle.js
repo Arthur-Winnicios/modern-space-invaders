@@ -3,7 +3,9 @@ class Particle {
     this.position = position;
     this.velocity = velocity;
     this.radius = radius;
+
     this.color = color;
+
     this.opacity = 1;
     this.fades = fades;
   }

@@ -9,19 +9,19 @@
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
-    <link rel="shortcut icon" href="img/spaceship.png" type="image/x-icon" />
-    <title>Space Invaders</title>
+    <link rel="shortcut icon" href="img/spaceship.png" type="image/x-icon">
+    <title>Modern Space Invaders | Wanderson Timóteo</title>
     <style>
       body,
       html {
+        height: 100%;
+        margin: 0;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 0;
-        height: 100%;
-        font-family: "Press Start 2P", Arial, Helvetica, sans-serif;
+        background-color: black;
+        font-family: "Press Start 2P", sans-serif;
         font-size: 14px;
-        background-color: rgb(214, 103, 214);
       }
     </style>
   </head>
@@ -33,9 +33,9 @@
           position: absolute;
           z-index: 10;
           color: white;
-          margin: 0;
           left: 10px;
           top: 10px;
+          margin: 0;
           display: none;
         "
       >
@@ -46,17 +46,17 @@
       <div
         id="startScreen"
         style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
           position: absolute;
           top: 0;
-          left: 0;
           right: 0;
           bottom: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+          left: 0;
           background: url('./img/startScreenBackground.png');
-          background-repeat: no-repeat;
           background-size: contain;
+          background-repeat: no-repeat;
           z-index: 20;
         "
       >
@@ -64,9 +64,10 @@
           <h1 style="color: white">Space Invaders</h1>
           <div
             id="startButton"
-            style="position: relative; display: inline-block; cursor: pointer"
+            style="cursor: pointer; position: relative; display: inline-block"
           >
             <img src="./img/button.png" alt="Start Button" />
+
             <span
               style="
                 position: absolute;
@@ -81,30 +82,28 @@
           </div>
         </div>
       </div>
-      <!-- Fim startScreen-->
-
       <div
         id="restartScreen"
         style="
           display: none;
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: url('./img/startScreenBackground.png');
-          z-index: 20;
-          background-size: contain;
-          background-repeat: no-repeat;
           align-items: center;
           justify-content: center;
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background: url('./img/startScreenBackground.png');
+          background-size: contain;
+          background-repeat: no-repeat;
+          z-index: 20;
         "
       >
         <div style="text-align: center">
           <h1 style="color: white">Game Over</h1>
           <div
             id="restartButton"
-            style="position: relative; display: inline-block; cursor: pointer"
+            style="cursor: pointer; position: relative; display: inline-block"
           >
             <img src="./img/button.png" alt="Restart Button" />
             <span
@@ -121,32 +120,30 @@
           </div>
         </div>
       </div>
-      <!-- Fim restartScreen -->
+
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+        integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+      ></script>
+
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"
+        integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+      ></script>
+      <script src="./audio.js"></script>
+      <script src="./js/util.js"></script>
+      <script src="./js/classes/Player.js"></script>
+      <script src="./js/classes/Projectile.js"></script>
+      <script src="./js/classes/Particle.js"></script>
+      <script src="./js/classes/InvaderProjectile.js"></script>
+      <script src="./js/classes/Invader.js"></script>
+      <script src="./js/classes/Grid.js"></script>
+      <script src="./js/classes/Bomb.js"></script>
+      <script src="./index.js"></script>
     </div>
-    <!-- Fim id="parentDiv"-->
-
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
-      integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"
-      integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script src="./audio.js"></script>
-    <script src="./js/util.js"></script>
-    <script src="./js/classes/Player.js"></script>
-    <script src="./js/classes/Projectile.js"></script>
-    <script src="./js/classes/Particle.js"></script>
-    <script src="./js/classes/InvaderProjectile.js"></script>
-    <script src="./js/classes/Invader.js"></script>
-    <script src="./js/classes/Grid.js"></script>
-    <script src="./js/classes/Bomb.js"></script>
-    <script src="./index.js"></script>
   </body>
 </html>
